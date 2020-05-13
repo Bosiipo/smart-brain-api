@@ -23,7 +23,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/test', (req,res) => {return res.json({message: 'connected'});})
+// app.get('/test', (req,res) => {return res.json({message: 'connected'});})
 app.get('/', (req, res) => { res.send('it is working!')});
 app.post('/signin', signin.handleSignIn(db, bcrypt));
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});

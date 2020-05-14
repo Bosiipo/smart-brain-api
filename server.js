@@ -12,10 +12,12 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
-      user : 'postgres',
-      password : 'postgres',
-      database : 'smartbrain'
+      // host : '127.0.0.1',
+      // user : 'postgres',
+      // password : 'postgres',
+      // database : 'smartbrain'
+      connectionString: process.env.DATABASE_URL,
+      ssl: true
     }
 });
 
@@ -25,10 +27,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send(database.users);
-});
 
+app.get('/', (req, res) => { res.send('it is working!') });
 app.post('/signin', signin.handleSignIn(db, bcrypt));
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
